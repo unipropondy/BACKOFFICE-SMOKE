@@ -247,6 +247,17 @@ if (row.ImageData) {
         setShowModal(true);
       };
 
+      const handleDelete = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this dish group?")) return;
+
+        try {
+          await axios.delete(`${BASE_URL}/dishgroup/${id}`);
+          await fetchDishGroup();
+        } catch (err) {
+          alert(err.response?.data || "Delete failed");
+        }
+      };
+
       const filteredData = entries.filter((row) => {
         return Object.keys(filters).every((key) => {
           if (!filters[key]) return true;
@@ -772,6 +783,7 @@ Cancel
 <th>Discount</th>
 <th>SortCode</th>
 <th>KitchenSortCode</th>
+<th>Actions</th>
 </tr>
 </thead>
 
@@ -779,7 +791,7 @@ Cancel
 
 {loading ? (
   <tr>
-    <td colSpan="8">
+    <td colSpan="9">
       <div className="spinner"></div>
     </td>
   </tr>
@@ -787,7 +799,7 @@ Cancel
 ) : entries.length === 0 ? (
 
   <tr>
-    <td colSpan="8">No Data Found</td>
+    <td colSpan="9">No Data Found</td>
   </tr>
 
 ) : (paginatedData.map((row,index)=>(//(entries.map((row,index)=>(
@@ -831,6 +843,11 @@ Cancel
 
 <td>{row.SortCode}</td>
 <td>{row.KitchenSortCode}</td>
+<td onClick={(e) => e.stopPropagation()}>
+  <button type="button" onClick={() => handleDelete(row.DishGroupId)}>
+    Delete
+  </button>
+</td>
 
 </tr>
 

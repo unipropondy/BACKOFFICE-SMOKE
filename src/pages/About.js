@@ -171,6 +171,17 @@ setSelectedModifiers(ids);
 });
 };
 
+const handleDelete = async (id) => {
+  if (!window.confirm("Are you sure you want to delete this category?")) return;
+
+  try {
+    await axios.delete(`${BASE_URL}/category/${id}`);
+    await fetchCategory();
+  } catch (err) {
+    alert(err.response?.data?.message || "Delete failed");
+  }
+};
+
 const handleSubmit = async (e)=>{
 
 e.preventDefault();
@@ -955,6 +966,7 @@ Cancel
 {/* <th>Language</th> */}
 <th>Service</th>
 <th>Member</th>
+<th>Actions</th>
 </tr>
 </thead>
 
@@ -962,7 +974,7 @@ Cancel
 
 {loading ? (
   <tr>
-    <td colSpan="10">
+    <td colSpan="11">
       <div className="spinner"></div>
     </td>
   </tr>
@@ -970,7 +982,7 @@ Cancel
 ) : filteredData.length === 0 ? (
 
   <tr>
-    <td colSpan="10">No entries yet</td>
+    <td colSpan="11">No entries yet</td>
   </tr>
 
 ) : (
@@ -1023,6 +1035,11 @@ Cancel
   checked={row.isMemberSalesAllowed}
   onChange={() => toggleField(row, "isMemberSalesAllowed")}
 />
+</td>
+<td onClick={(e) => e.stopPropagation()}>
+  <button type="button" onClick={() => handleDelete(row.CategoryId)}>
+    Delete
+  </button>
 </td>
 </tr>
 ))

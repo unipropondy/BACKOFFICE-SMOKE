@@ -384,7 +384,7 @@ const handleSelectAll = async (checked) => {
   </div>
 </th>
 
-{/* <th>Actions</th> */}
+<th>Actions</th>
           </tr>
         </thead>
 
@@ -424,6 +424,11 @@ const handleSelectAll = async (checked) => {
       toggleActive(row);
     }}
   />
+</td>
+<td onClick={(e) => e.stopPropagation()}>
+  <button type="button" onClick={() => handleDelete(row.id)}>
+    Delete
+  </button>
 </td>
 </tr>
   ))

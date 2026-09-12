@@ -405,6 +405,17 @@ setSelectedOrderItemShare(osNames);
   setShowModal(true);
 };
 
+const handleDelete = async (id) => {
+  if (!window.confirm("Are you sure you want to delete this dish?")) return;
+
+  try {
+    await axios.delete(`${BASE_URL}/dish/${id}`);
+    await fetchDish();
+  } catch (err) {
+    alert(err.response?.data || "Delete failed");
+  }
+};
+
 const filteredData = entries.filter((row) => {
   return Object.keys(filters).every((key) => {
     if (!filters[key]) return true;
@@ -752,7 +763,7 @@ const totalRows = filteredData.length;
 
             {loading ? (
               <tr>
-                <td colSpan="12">
+                <td colSpan="13">
                   <div className="spinner"></div>
                 </td>
               </tr>
@@ -760,7 +771,7 @@ const totalRows = filteredData.length;
             ) : entries.length === 0 ? (
 
               <tr>
-                <td colSpan="12">No Data Found</td>
+                <td colSpan="13">No Data Found</td>
               </tr>
 
             ) : (
@@ -810,6 +821,11 @@ const totalRows = filteredData.length;
                       handleToggle(d, "isDiscountAllowed", e.target.checked);
                     }}
                   />
+                </td>
+                <td onClick={(e) => e.stopPropagation()}>
+                  <button type="button" onClick={() => handleDelete(d.DishId)}>
+                    Delete
+                  </button>
                 </td>
                   {/* <td>{d.IsTaxAllowed ? "Yes" : "No"}</td> */}
                   {/* <td>{d.IsStockDish ? "Yes" : "No"}</td> */}
