@@ -40,6 +40,10 @@ const dashboardRoutes = require("./routes/dashboard");
 
 app.use("/api", dashboardRoutes);
 
+const comboRoutes = require("./routes/comboRoutes");
+
+app.use("/api/combo", comboRoutes);
+
 const rewardRoutes = require("./routes/rewardRoutes");
 
 app.use("/api/rewardpoints", rewardRoutes);

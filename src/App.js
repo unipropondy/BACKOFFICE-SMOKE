@@ -7,6 +7,7 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import DishGroup from "./pages/DishGroup";
 import Dish from "./pages/Dish";
+import ComboGroupMaster from "./pages/ComboGroupMaster";
 import Modifier from "./pages/Modifier";
 import Inventory from "./pages/Inventory";
 import Settlement from "./pages/Settlement";
@@ -66,6 +67,7 @@ function Layout() {
           <Route path="/About" element={<About />} />
           <Route path="/DishGroup" element={<DishGroup />} />
           <Route path="/Dish" element={<Dish />} />
+ <Route path="/ComboGroupMaster" element={<ComboGroupMaster />} />
           <Route path="/Modifier" element={<Modifier />} />
           <Route path="/Inventory" element={<Inventory />} />
           <Route path="/Settlement" element={<Settlement />} />
