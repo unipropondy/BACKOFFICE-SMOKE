@@ -29,6 +29,7 @@ import { BASE_URL } from "../config/api";
     IsgroupDish: false,
     IsShowinKiosk: false,
     IsActive: false,
+    IsCombo: false,
     iskitchenPrint: false,
     isDiscountAllowed: false,
     IsTaxAllowed: false,
@@ -203,6 +204,7 @@ const [selectedOrderItemShare, setSelectedOrderItemShare] = useState([]);
     formData.append("SubkitchenType", "");
     
     formData.set("IsActive", dish.IsActive ? 1 : 0);
+    formData.set("IsCombo", dish.IsCombo ? 1 : 0);
     formData.set("iskitchenPrint", dish.iskitchenPrint ? 1 : 0);
     formData.set("isDiscountAllowed", dish.isDiscountAllowed ? 1 : 0);
     formData.set("IsTaxAllowed", dish.IsTaxAllowed ? 1 : 0);
@@ -950,6 +952,7 @@ const totalRows = filteredData.length;
                 {/* CHECKBOX GRID */}
                 <div className="dish-check-grid1">
                   <label><input type="checkbox" name="IsActive" checked={dish.IsActive} onChange={handleChange} /> Active</label>
+                  <label><input type="checkbox" name="IsCombo" checked={dish.IsCombo} onChange={handleChange} /> Combo</label>
                   <label><input type="checkbox" name="iskitchenPrint" checked={dish.iskitchenPrint} onChange={handleChange} /> kitchen</label>
                   <label><input type="checkbox" name="isDiscountAllowed" checked={dish.isDiscountAllowed} onChange={handleChange} /> Discount Allowed</label>
                   <label><input type="checkbox" name="IsTaxAllowed" checked={dish.IsTaxAllowed} onChange={handleChange} /> Tax</label>
